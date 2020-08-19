@@ -1,0 +1,5 @@
+ignore: [".vscode", "__pycache__", ".git"]
+auto_fix: true
+text options: # This maps directly to those used in html2text
+  unicode_snob: true
+  links_each_paragraph: true
