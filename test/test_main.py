@@ -1,18 +1,26 @@
-(import pytest dit dit.documentation bs4 html2text)
+import pytest
+import dit
+import dit.documentation
+import bs4
+import html2text
 
-(defn test_argument_parsing []
-  (setv args (dit.parse_arguments ["-h"]))
-  (print args))
+def test_argument_parsing():
+    args = dit.parse_arguments("-h")
+    print(args)
 
-(defn test_soup []
-  (setv soup (bs4.BeautifulSoup "" "html.parser")
-        test_tag (.new_tag (bs4.BeautifulSoup "" "html.parser") "h1")
-        (. test_tag string) "something")
-  (.append soup test_tag)
-  (print soup))
+def test_soup():
+    soup = bs4.BeautifulSoup("", "html.parser")
+    test_tag = bs4.BeautifulSoup("", "html.parser").new_tag("h1")
+    test_tag.string = "something"
 
-(defn test_stub_directory []
-  (setv parser (html2text.HTML2Text)
-        document (dit.documentation._generate_stub ["foo" "bar" "baz"]))
-  (print (.handle parser (str document)))
-  (assert False))
+    soup.append(test_tag)
+
+    print soup
+
+def test_stub_directory():
+    parser = html2text.HTML2Text()
+    document = dit.documentation._generate_stub("foo", "bar", "baz")
+
+    print(parser.handle(str(document)))
+
+    assert False
